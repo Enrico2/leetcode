@@ -1,4 +1,4 @@
-package com.enricode.leetcode.nqueens
+package com.enricode.util
 
 object ArrayPermutations {
 

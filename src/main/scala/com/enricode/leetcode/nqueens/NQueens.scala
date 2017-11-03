@@ -34,18 +34,26 @@ object NQueens extends App {
     val n = a.length
     if (a.map(findQueen(_)).sum == (0 until n).sum) {
       var rep = true
-      for (i <- 0 until n; j <- 0 until n if rep) {
-        if (a(i)(j)) {
-          var x = 0
-          var y = 0
 
-          x = i-1; y = j-1; while (rep && x >= 0 && y >= 0) { if (a(x)(y)) rep = false; x -= 1; y -= 1 }
-          x = i-1; y = j+1; while (rep && x >= 0 && y < n ) { if (a(x)(y)) rep = false; x -= 1; y += 1 }
-          x = i+1; y = j-1; while (rep && x < n  && y >= 0) { if (a(x)(y)) rep = false; x += 1; y -= 1 }
-          x = i+1; y = j+1; while (rep && x < n  && y < n ) { if (a(x)(y)) rep = false; x += 1; y += 1 }
+      for (k <- 0 until (2 * n) - 1 if rep) {
+        var rtl = 0
+        var ltr = 0
+
+        for (j <- 0 to k) {
+          val i = k - j
+          if (i < n && j < n) {
+            if (a(i)(j)) rtl += 1
+            if (a(j)(n - 1 - i)) ltr += 1
+          }
+        }
+
+        if (rtl > 1 || ltr > 1) {
+          rep = false
         }
       }
+
       rep
+
     } else {
       false
     }
@@ -67,19 +75,11 @@ object NQueens extends App {
   }
 
   private[this] def solve(a: Seq[mutable.Seq[Boolean]], row: Int): Unit = {
-    val n = a.length
-    var cont = true
-    while (moveQueenPlus1(a(row)) && cont) {
-      if (row == n-1 && isSolution(a)) {
-        solutions.add(a)
-        for (i <- 0 until n) {
-          a(row)(i) = false
-        }
-        cont = false
-      }
-
-      if (row < n-1) {
-        solve(a, row+1)
+    if (row == a.length) {
+      if (isSolution(a)) solutions.add(a)
+    } else {
+      while (moveQueenPlus1(a(row))) {
+        solve(a, row + 1)
       }
     }
   }

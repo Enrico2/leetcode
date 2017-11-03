@@ -32,7 +32,18 @@ object NQueens extends App {
 
   private[this] def isSolution(a: Seq[mutable.Seq[Boolean]]): Boolean = {
     val n = a.length
-    if (a.map(findQueen(_)).sorted == (0 until n)) {
+    val b = mutable.Seq.fill(a.length)(0)
+
+    var bad = false
+    for (i <- 0 until n) {
+      var s = 0
+      for (j <- 0 until n) {
+        if (a(j)(i)) s += 1
+      }
+      if (s > 1) bad = true
+    }
+
+    if (!bad) {
       var rep = true
 
       for (k <- 0 until (2 * n) - 1 if rep) {

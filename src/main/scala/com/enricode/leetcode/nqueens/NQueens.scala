@@ -92,6 +92,8 @@ object NQueens extends App {
   }
 
   val start = System.currentTimeMillis()
-  println(s"${solveNQueens(8)}")
+  val solves = solveNQueens(8)
+  println(s"number of solutions: ${solves.size}")
+  println(s"$solves")
   println(s"time: ${System.currentTimeMillis() - start}ms")
 }

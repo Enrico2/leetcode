@@ -66,19 +66,27 @@ object NQueens extends App {
     }
   }
 
-  private[this] def solve(a: Seq[mutable.Seq[Boolean]], row: Int, n: Int): Unit = {
-    if (row == n) {
-      if (isSolution(a)) solutions.add(a)
-    } else {
-      while (moveQueenPlus1(a(row))) {
-        solve(a, row + 1, n)
+  private[this] def solve(a: Seq[mutable.Seq[Boolean]], row: Int): Unit = {
+    val n = a.length
+    var cont = true
+    while (moveQueenPlus1(a(row)) && cont) {
+      if (row == n-1 && isSolution(a)) {
+        solutions.add(a)
+        for (i <- 0 until n) {
+          a(row)(i) = false
+        }
+        cont = false
+      }
+
+      if (row < n-1) {
+        solve(a, row+1)
       }
     }
   }
 
   def solveNQueens(n: Int): List[List[String]] = {
     val a = Seq.fill(n)(mutable.Seq.fill(n)(false))
-    solve(a, 0, n)
+    solve(a, 0)
 
     solutions.toResponse()
   }

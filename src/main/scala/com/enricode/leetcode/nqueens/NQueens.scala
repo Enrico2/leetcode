@@ -2,25 +2,23 @@ package com.enricode.leetcode.nqueens
 
 import scala.collection.mutable
 
+/**
+  * https://leetcode.com/problems/n-queens
+  * Leet code has some weird rules about global variables, so this code isn't ideal.
+  */
 object NQueens extends App {
-  val Q = 'Q'
-  val D = '.'
-
-  type Solution = Seq[String]
-
+  var solutions: Solutions = null
   class Solutions() {
-    private[this] val solutions = mutable.ListBuffer[Solution]()
+    private[this] val solutions = mutable.ListBuffer[Seq[String]]()
 
     def toResponse(): List[List[String]] = solutions.map(_.toList).toList
 
     def add(a: Seq[mutable.Seq[Boolean]]): Unit = solutions.append(
       a.map { bools =>
-        bools.map { b => if (b) Q else D }.mkString("")
+        bools.map { b => if (b) 'Q' else '.' }.mkString("")
       }
     )
   }
-
-  val solutions: Solutions = new Solutions()
 
   private[this] def findQueen(a: Seq[Boolean]): Int = {
     var r = -1
@@ -32,7 +30,6 @@ object NQueens extends App {
 
   private[this] def isSolution(a: Seq[mutable.Seq[Boolean]]): Boolean = {
     val n = a.length
-    val b = mutable.Seq.fill(a.length)(0)
 
     var bad = false
     for (i <- 0 until n) {
@@ -90,20 +87,24 @@ object NQueens extends App {
       if (isSolution(a)) solutions.add(a)
     } else {
       while (moveQueenPlus1(a(row))) {
-        solve(a, row + 1)
+        if (isSolution(a)) solve(a, row + 1)
       }
     }
   }
 
   def solveNQueens(n: Int): List[List[String]] = {
-    val a = Seq.fill(n)(mutable.Seq.fill(n)(false))
-    solve(a, 0)
+    if (n == 1) List(List("Q"))
+    else if (n < 4) Nil
+    else {
+      solutions = new Solutions()
+      solve(Seq.fill(n)(mutable.Seq.fill(n)(false)), 0)
 
-    solutions.toResponse()
+      solutions.toResponse()
+    }
   }
 
   val start = System.currentTimeMillis()
-  val solves = solveNQueens(8)
+  val solves = solveNQueens(5)
   println(s"number of solutions: ${solves.size}")
   println(s"$solves")
   println(s"time: ${System.currentTimeMillis() - start}ms")

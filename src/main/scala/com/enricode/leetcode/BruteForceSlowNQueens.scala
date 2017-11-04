@@ -1,9 +1,9 @@
 package com.enricode.leetcode
 
-import com.enricode.util.ArrayPermutations
+import com.enricode.util.{ArrayPermutations, LeetcodeApp}
 import scala.collection.mutable
 
-object BruteForceSlowNQueens extends App {
+object BruteForceSlowNQueens extends LeetcodeApp {
   val Q = 'Q'
   val D = '.'
 
@@ -59,5 +59,5 @@ object BruteForceSlowNQueens extends App {
     solutions.toList
   }
 
-  println(s"${solveNQueens(4)}")
+  override def run(): Unit = println(s"${solveNQueens(4)}")
 }

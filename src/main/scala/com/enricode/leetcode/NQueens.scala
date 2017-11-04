@@ -1,13 +1,15 @@
 package com.enricode.leetcode
 
+import com.enricode.util.LeetcodeApp
 import scala.collection.mutable
 
 /**
   * https://leetcode.com/problems/n-queens
   * Leet code has some weird rules about global variables, so this code isn't ideal.
   */
-object NQueens extends App {
+object NQueens extends LeetcodeApp {
   var solutions: Solutions = null
+
   class Solutions() {
     private[this] val solutions = mutable.ListBuffer[Seq[String]]()
 
@@ -103,9 +105,9 @@ object NQueens extends App {
     }
   }
 
-  val start = System.currentTimeMillis()
-  val solves = solveNQueens(5)
-  println(s"number of solutions: ${solves.size}")
-  println(s"$solves")
-  println(s"time: ${System.currentTimeMillis() - start}ms")
+  override def run(): Unit = {
+    val solves = solveNQueens(5)
+    println(s"number of solutions: ${solves.size}")
+    println(s"$solves")
+  }
 }

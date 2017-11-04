@@ -1,4 +1,4 @@
-package com.enricode.leetcode.nqueens
+package com.enricode.leetcode
 
 import com.enricode.util.ArrayPermutations
 import scala.collection.mutable

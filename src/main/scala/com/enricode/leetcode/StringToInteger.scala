@@ -15,7 +15,7 @@ object StringToInteger extends LeetcodeApp {
     def toDigit(c: Char) = (c - '0').toLong
 
 
-    val regex = "\\s*([+-]?)(\\d+).*".r
+    val regex = raw"\s*([+-]?)(\d+).*".r
 
     str match {
       case regex(sign, num) =>

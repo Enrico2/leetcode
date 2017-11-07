@@ -1,6 +1,7 @@
 package com.enricode.leetcode
 
-import com.enricode.util.{Heap, LeetcodeApp, MaxHeap, MinHeap}
+import com.enricode.util.LeetcodeApp
+import scala.collection.mutable
 import scala.util.Random
 
 
@@ -8,25 +9,25 @@ import scala.util.Random
   * https://leetcode.com/problems/find-median-from-data-stream/description/
   */
 class MedianFinder() {
-  private[this] val maxHeap = new MaxHeap[Int] // [0 ~ n/2]
-  private[this] val minHeap = new MinHeap[Int] // (n/2 ~ n)
+  private[this] val maxHeap = new mutable.PriorityQueue[Int]()
+  private[this] val minHeap = new mutable.PriorityQueue[Int]().reverse
 
-  private[this] def chooseHeap: Heap[Int] = {
+  private[this] def chooseHeap: mutable.PriorityQueue[Int] = {
     if (maxHeap.size == minHeap.size) maxHeap else minHeap
   }
 
   def addNum(num: Int): Unit = {
     val h = chooseHeap
-    h.push(num)
+    h.enqueue(num)
 
-    (maxHeap.peek(), minHeap.peek()) match {
+    (maxHeap.headOption, minHeap.headOption) match {
       case (Some(x), Some(y)) =>
         if (x > y) {
-          maxHeap.pop()
-          minHeap.pop()
+          maxHeap.dequeue()
+          minHeap.dequeue()
 
-          maxHeap.push(y)
-          minHeap.push(x)
+          maxHeap.enqueue(y)
+          minHeap.enqueue(x)
         }
       case (l, r) =>
         ()
@@ -34,8 +35,8 @@ class MedianFinder() {
   }
 
   def findMedian(): Double = {
-    if (maxHeap.size == minHeap.size) (maxHeap.peek().toSeq ++ minHeap.peek().toSeq).sum.toDouble / 2
-    else maxHeap.peek().get
+    if (maxHeap.size == minHeap.size) (maxHeap.headOption.toSeq ++ minHeap.headOption.toSeq).sum.toDouble / 2
+    else maxHeap.head
   }
 }
 

@@ -6,6 +6,12 @@ import scala.collection.mutable
 class MaxHeap[T <% Ordered[T]] extends Heap[T](_ > _)
 class MinHeap[T <% Ordered[T]] extends Heap[T](_ <= _)
 
+/**
+  * This might still have some errors somewhere.
+  * @param compare
+  * @param ev$1
+  * @tparam T
+  */
 abstract class Heap[T <% Ordered[T]](compare: (T, T) => Boolean) {
   private[this] val a = mutable.ArrayBuffer[T]()
 

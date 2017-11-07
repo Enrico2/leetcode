@@ -27,11 +27,8 @@ class ValidWordAbbr(dict: Array[String]) {
 }
 
 /**
-  * Your ValidWordAbbr object will be instantiated and called as such:
-  * var obj = new ValidWordAbbr(dictionary)
-  * var param_1 = obj.isUnique(word)
+  * https://leetcode.com/problems/unique-word-abbreviation
   */
-
 object UniqueWordAbbreviation extends LeetcodeApp {
   override def run(): Unit = ???
 }

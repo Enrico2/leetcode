@@ -1,6 +1,6 @@
 package com.enricode.leetcode
 
-import com.enricode.util.{ArrayPermutations, LeetcodeApp}
+import com.enricode.util.LeetcodeApp
 import scala.annotation.tailrec
 import scala.util.Random
 
@@ -9,18 +9,15 @@ import scala.util.Random
   */
 object MedianSortedArrays extends LeetcodeApp {
   private[this] def tests(max: Int) = {
-
-    val stream = ArrayPermutations((1 to max))
     val expect = max.toDouble / 2 + 0.5
-    stream.take(15).map { perm =>
-      for (_ <- 1 to 5) {
-        val (a, b) = Random.shuffle(perm).splitAt(Random.nextInt(perm.length - 1) + 1)
-        val got = findMedianSortedArrays(a.sorted.toArray, b.sorted.toArray)
-        if (got != expect) {
-          println(s"ERROR: For $a, $b got $got but expected $expect")
-        }
+    (1 to 15).foreach { _ =>
+      val (a, b) = Random.shuffle((1 to max)).splitAt(Random.nextInt(max - 1) + 1)
+      val got = findMedianSortedArrays(a.sorted.toArray, b.sorted.toArray)
+      if (got != expect) {
+        println(s"ERROR: For $a, $b got $got but expected $expect")
       }
     }
+
     println(s"done testing $max")
   }
 

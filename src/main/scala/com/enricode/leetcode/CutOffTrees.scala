@@ -59,7 +59,15 @@ object CutOffTrees extends LeetcodeApp {
       List(79662, 15626, 995, 80546, 64775, 0, 68820),
       List(25160, 82123, 81706, 21494, 92958, 33594, 5243)
     )
-    val forest2 = List(List(2,3,4),List(0,0,5),List(8,7,6))
+    val forest2 = List(List(2, 3, 4), List(0, 0, 5), List(8, 7, 6))
+
+    val forest3 = List(
+      List(54581641, 64080174, 24346381, 69107959),
+      List(86374198, 61363882, 68783324, 79706116),
+      List(668150, 92178815, 89819108, 94701471),
+      List(83920491, 22724204, 46281641, 47531096),
+      List(89078499, 18904913, 25462145, 60813308))
+
     val ans = cutOffTree(forest1)
 
     println(s"$ans")

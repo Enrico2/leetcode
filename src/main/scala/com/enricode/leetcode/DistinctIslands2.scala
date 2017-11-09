@@ -4,6 +4,9 @@ import com.enricode.util.LeetcodeApp
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
+/**
+  * https://leetcode.com/problems/number-of-distinct-islands-ii
+  */
 object DistinctIslands2 extends LeetcodeApp {
   import com.enricode.util.RanArrays.inBounds
 
@@ -94,7 +97,7 @@ object DistinctIslands2 extends LeetcodeApp {
         val a = Array.ofDim[Int](nn, nm)
         for (i <- 0 until n) {
           for (j <- 0 until m) {
-            val (ni,nj) = move(id)(i,j)
+            val (ni, nj) = move(id)(i, j)
             a(ni)(nj) = grid(i)(j)
           }
         }
@@ -108,7 +111,7 @@ object DistinctIslands2 extends LeetcodeApp {
   def findIslands(grid: Array[Array[Int]]): Seq[Island] = {
     val n = grid.length
     val m = grid(0).length
-    val ds = Seq((-1,0), (1,0), (0,-1), (0,1))
+    val ds = Seq((-1, 0), (1, 0), (0, -1), (0, 1))
     val seen = mutable.Set[(Int, Int)]()
 
     val islands = ListBuffer[Island]()
@@ -117,13 +120,13 @@ object DistinctIslands2 extends LeetcodeApp {
 
       val q = new mutable.Queue[(Int, Int)]()
       val ijs = mutable.ListBuffer[(Int, Int)]()
-      q.enqueue((i,j))
+      q.enqueue((i, j))
 
 
       while (q.nonEmpty) {
         val (x, y) = q.dequeue()
-        if (!seen((x,y))) {
-          seen += ((x,y))
+        if (!seen((x, y))) {
+          seen += ((x, y))
           if (grid(x)(y) == 1) {
             ijs.append((x, y))
 

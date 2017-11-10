@@ -8,7 +8,7 @@ import scala.collection.mutable.ListBuffer
   * https://leetcode.com/problems/number-of-distinct-islands-ii
   */
 object DistinctIslands2 extends LeetcodeApp {
-  import com.enricode.util.RanArrays.inBounds
+  import com.enricode.util.Util.inBounds
 
   override def run(): Unit = {
     val sea1 =

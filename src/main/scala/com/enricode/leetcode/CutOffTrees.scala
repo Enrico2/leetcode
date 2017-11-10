@@ -7,7 +7,7 @@ import com.enricode.util.LeetcodeApp
   */
 object CutOffTrees extends LeetcodeApp {
 
-  import com.enricode.util.RanArrays.inBounds
+  import com.enricode.util.Util.inBounds
 
   override def run(): Unit = {
     val forest1 = List(

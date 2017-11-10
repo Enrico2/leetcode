@@ -3,6 +3,9 @@ package com.enricode.leetcode
 import com.enricode.util.LeetcodeApp
 import scala.collection.mutable
 
+/**
+  * https://leetcode.com/problems/string-compression/description/
+  */
 object StringCompression extends LeetcodeApp {
 
   override def run(): Unit = {

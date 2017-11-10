@@ -2,6 +2,9 @@ package com.enricode.leetcode
 
 import com.enricode.util.LeetcodeApp
 
+/**
+  * https://leetcode.com/problems/remove-invalid-parentheses
+  */
 object InvalidParentheses extends LeetcodeApp {
   override def run(): Unit = {
     val ins = Seq("()())()" , "(())()", "()()()", "(a)())()", "(a())()", ")(")

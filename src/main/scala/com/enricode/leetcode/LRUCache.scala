@@ -3,6 +3,10 @@ package com.enricode.leetcode
 import com.enricode.util.LeetcodeApp
 import scala.collection.mutable
 
+/**
+  * https://leetcode.com/problems/lru-cache/description/
+  * @param capacity
+  */
 class LRUCache(capacity: Int) {
   case class Node(var prev: Option[Node], var next: Option[Node], k: Int, var v: Int)
 

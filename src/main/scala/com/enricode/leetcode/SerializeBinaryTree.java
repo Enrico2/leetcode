@@ -34,24 +34,24 @@ public class SerializeBinaryTree {
                 while (data.charAt(++k) != '(') {}
                 int val = Integer.parseInt(data.substring(i+1, k));
 
-                Stack<Character> s = new Stack<>();
-                s.push(data.charAt(k));
+
+                int stack = 1;
                 int l = k;
-                while (!s.isEmpty()) {
+                while (stack > 0) {
                     l++;
-                    if (data.charAt(l) == '(') s.push('(');
-                    if (data.charAt(l) == ')') s.pop();
+                    if (data.charAt(l) == '(') stack++;
+                    if (data.charAt(l) == ')') stack--;
                 }
 
                 TreeNode left = deserialize(data, k, l+1);
 
                 k = l+1;
-                s.push(data.charAt(k));
+                stack++;
                 l = k;
-                while (!s.isEmpty()) {
+                while (stack > 0) {
                     l++;
-                    if (data.charAt(l) == '(') s.push('(');
-                    if (data.charAt(l) == ')') s.pop();
+                    if (data.charAt(l) == '(') stack++;
+                    if (data.charAt(l) == ')') stack--;
                 }
 
                 TreeNode right = deserialize(data, k, l+1);

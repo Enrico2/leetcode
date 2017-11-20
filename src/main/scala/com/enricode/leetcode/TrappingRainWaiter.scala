@@ -8,7 +8,7 @@ import scala.collection.mutable
   */
 object TrappingRainWaiter extends LeetcodeApp {
 
-  override def run(): Unit = println(trap(Array(0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1)))
+  override def run(): Unit = println(trap2(Array(0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1)))
 
   def trap(height: Array[Int]): Int = {
     val n = height.length
@@ -33,6 +33,36 @@ object TrappingRainWaiter extends LeetcodeApp {
       }
 
       total
+    }
+  }
+
+  def trap2(height: Array[Int]): Int = {
+    val n = height.length
+    if (n < 3) 0 else {
+      var leftMax = Int.MinValue
+      var rightMax = Int.MinValue
+
+      var i = 0
+      var j = n-1
+      var ans = 0
+      while (i<j) {
+        if (height(i) < height(j)) {
+          if (height(i) > leftMax) {
+            leftMax = height(i)
+          } else {
+            ans += leftMax - height(i)
+          }
+          i += 1
+        } else {
+          if (height(j) > rightMax) {
+            rightMax = height(j)
+          } else {
+            ans += rightMax - height(j)
+          }
+          j -= 1
+        }
+      }
+      ans
     }
   }
 }

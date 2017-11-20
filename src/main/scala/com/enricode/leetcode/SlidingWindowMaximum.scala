@@ -15,6 +15,39 @@ object SlidingWindowMaximum extends LeetcodeApp {
     val n = a.length
     if (n == 0) return Array.empty[Int]
 
+    val leftMax = Array.ofDim[Int](n)
+    val rightMax = Array.ofDim[Int](n)
+
+    var maxSoFar = Int.MinValue
+    leftMax.indices.foreach { i =>
+      if (i % k == 0) {
+        maxSoFar = Int.MinValue
+      }
+      maxSoFar = math.max(a(i), maxSoFar)
+      leftMax(i) = maxSoFar
+    }
+
+    maxSoFar = Int.MinValue
+    rightMax.indices.reverse.foreach { i =>
+      if (i % k == k-1) {
+        maxSoFar = Int.MinValue
+      }
+      maxSoFar = math.max(a(i), maxSoFar)
+      rightMax(i) = maxSoFar
+    }
+
+    val d = Array.ofDim[Int](n - k + 1)
+    d.indices.foreach { i =>
+      d(i) = math.max(rightMax(i), leftMax(i+k-1))
+    }
+    d
+  }
+
+
+  def maxSlidingWindowSlow(a: Array[Int], k: Int): Array[Int] = {
+    val n = a.length
+    if (n == 0) return Array.empty[Int]
+
     val deque = new util.ArrayDeque[Int]()
     val ans = Array.ofDim[Int](n - k + 1)
 

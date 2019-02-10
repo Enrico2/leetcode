@@ -10,7 +10,7 @@ object IterateArrayDiagonals extends App {
       for (j <- 0 to k) {
         val i = k - j
         if (i < n && j < m) {
-          val (x, y) = if (rtl) (i, j) else (j, n-1-i)
+          val (x, y) = if (rtl) (i, j) else (j, n - 1 - i)
 
           println(s"($x, $y)")
           f(a(i)(j))

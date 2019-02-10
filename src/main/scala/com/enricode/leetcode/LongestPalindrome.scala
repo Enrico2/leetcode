@@ -20,7 +20,7 @@ object LongestPalindrome extends LeetcodeApp {
     def updateMax(i: Int, j: Int, l: Int) = {
       if (l > maxLength) {
         maxLength = l
-        ans = s.substring(i, j+1)
+        ans = s.substring(i, j + 1)
       }
     }
 

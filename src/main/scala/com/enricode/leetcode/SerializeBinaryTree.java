@@ -1,7 +1,6 @@
 package com.enricode.leetcode;
 
 import com.enricode.util.TreeNode;
-import java.util.Stack;
 
 /**
  * https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/
@@ -26,14 +25,13 @@ public class SerializeBinaryTree {
 
 
         private TreeNode deserialize(String data, int i, int j) {
-            String str = data.substring(i, j);
-            if (str.equals("(null)")) return null;
+            if (data.substring(i, j).equals("(null)")) return null;
 
             if (data.charAt(i) == '(') {
                 int k = i;
-                while (data.charAt(++k) != '(') {}
-                int val = Integer.parseInt(data.substring(i+1, k));
-
+                while (data.charAt(++k) != '(') {
+                }
+                int val = Integer.parseInt(data.substring(i + 1, k));
 
                 int stack = 1;
                 int l = k;
@@ -43,9 +41,9 @@ public class SerializeBinaryTree {
                     if (data.charAt(l) == ')') stack--;
                 }
 
-                TreeNode left = deserialize(data, k, l+1);
+                TreeNode left = deserialize(data, k, l + 1);
 
-                k = l+1;
+                k = l + 1;
                 stack++;
                 l = k;
                 while (stack > 0) {
@@ -54,9 +52,9 @@ public class SerializeBinaryTree {
                     if (data.charAt(l) == ')') stack--;
                 }
 
-                TreeNode right = deserialize(data, k, l+1);
+                TreeNode right = deserialize(data, k, l + 1);
 
-                if (data.charAt(l+1) != ')') {
+                if (data.charAt(l + 1) != ')') {
                     System.out.println("problem with String end: " + data);
                     return null;
                 }
@@ -78,7 +76,7 @@ public class SerializeBinaryTree {
 
 
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(1 , new TreeNode(2), new TreeNode(3, new TreeNode(4), new TreeNode(5)));
+        TreeNode root = new TreeNode(1, new TreeNode(2), new TreeNode(3, new TreeNode(4), new TreeNode(5)));
         Codec c = new Codec();
         String str = c.serialize(root);
         System.out.println(str);

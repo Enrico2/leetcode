@@ -7,13 +7,13 @@ class HeapTest extends org.scalatest.FunSuite {
     val h = new MinHeap[Int]
 
     Random.shuffle((1 to 2000).toArray.toSeq).foreach(h.push)
-    assert(h.peek() == Some(1))
+    assert(h.peek().contains(1))
   }
 
   test("MaxHeap") {
     val h = new MinHeap[Int]
 
     Random.shuffle((1 to 2000).toArray.toSeq).foreach(h.push)
-    assert(h.peek() == Some(2000))
+    assert(h.peek().contains(2000))
   }
 }

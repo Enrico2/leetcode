@@ -1,6 +1,6 @@
 package com.enricode.leetcode
 
-import com.enricode.util.LeetcodeApp
+import com.enricode.util.{LeetcodeApp, ListNode}
 import scala.collection.mutable
 
 /**
@@ -20,43 +20,23 @@ object MergeKLists extends LeetcodeApp {
     println(mergeKLists(lists))
   }
 
-  case class QueueNode(var n: ListNode) {
-    def setToNext = {
-      if (n != null) n = n.next
-    }
-
-    def value = if (n != null) n.x else Int.MaxValue
-  }
-
   def mergeKLists(lists: Array[ListNode]): ListNode = {
-    if (lists.isEmpty) return new ListNode()
-    else if (lists.forall(_ == null)) return null
-
-    implicit val ordering = new Ordering[QueueNode] {
-      override def compare(x: QueueNode, y: QueueNode): Int = x.value - y.value
+    val ordering = new Ordering[ListNode] {
+      override def compare(x: ListNode, y: ListNode): Int = x.x - y.x
     }
 
-    val q = new mutable.PriorityQueue[QueueNode]().reverse
-    val nodes = lists.flatMap { ln =>
-      if (ln != null) Some(QueueNode(ln)) else None
-    }
-    q.enqueue(nodes:_*)
+    val pq = mutable.PriorityQueue[ListNode](lists: _*)(ordering).reverse
 
-    var head: ListNode = null
+    val head = pq.dequeue()
     var curr = head
-    while (q.nonEmpty) {
-      val qn = q.dequeue()
 
-      if (head == null) {
-        head = qn.n
-        curr = head
-      } else {
-        curr.next = qn.n
-        curr = qn.n
-      }
-      qn.setToNext
+    if (curr.next != null) pq.enqueue(curr.next)
 
-      if (qn.n != null) q.enqueue(qn)
+    while (pq.nonEmpty) {
+      val next = pq.dequeue()
+      if (next.next != null) pq.enqueue(next.next)
+      curr.next = next
+      curr = next
     }
 
     head

@@ -11,11 +11,15 @@ abstract class Heap[T <% Ordered[T]](compare: (T, T) => Boolean) {
   private[this] val a = mutable.ArrayBuffer[T]()
 
   private[this] def left(n: Int) = 2 * n + 1
+
   private[this] def right(n: Int) = 2 * n + 2
+
   private[this] def parent(n: Int) = if (n % 2 == 0) n / 2 - 1 else n / 2
 
   def size = a.size
+
   def length = a.length
+
   def peek(): Option[T] = a.headOption
 
   def push(t: T): Unit = {

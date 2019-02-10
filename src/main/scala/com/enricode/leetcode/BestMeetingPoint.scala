@@ -7,10 +7,11 @@ import com.enricode.util.LeetcodeApp
   * https://leetcode.com/problems/best-meeting-point
   */
 object BestMeetingPoint extends LeetcodeApp {
+
   import scala.collection.mutable
 
   override def run(): Unit =
-    println(minTotalDistance(Array(Array(1,0,0,0,1),Array(0,0,0,0,0),Array(0,0,1,0,0))))
+    println(minTotalDistance(Array(Array(1, 0, 0, 0, 1), Array(0, 0, 0, 0, 0), Array(0, 0, 1, 0, 0))))
 
   def collect(grid: Array[Array[Int]], rows: Boolean) = {
     def choose[T](r: => T, c: => T) = if (rows) r else c

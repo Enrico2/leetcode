@@ -8,7 +8,7 @@ import scala.collection.mutable
   */
 object SmallestRange extends LeetcodeApp {
   override def run(): Unit = {
-    val nums = List(List(4,10,15,24,26),List(0,9,12,20),List(5,18,22,30))
+    val nums = List(List(4, 10, 15, 24, 26), List(0, 9, 12, 20), List(5, 18, 22, 30))
     println(smallestRange(nums).toList)
   }
 
@@ -27,7 +27,7 @@ object SmallestRange extends LeetcodeApp {
 
     while (cont) {
       val min = pqMin.dequeue()
-      if (minRange._2 - minRange._1 > max-min.head) minRange = (min.head, max)
+      if (minRange._2 - minRange._1 > max - min.head) minRange = (min.head, max)
 
       val tail = min.tail
       if (tail.isEmpty) {

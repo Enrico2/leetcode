@@ -8,6 +8,7 @@ object ArrayPermutations {
     * state is an array of unique integers from 1 to n-1.
     * This function returns a new state which is the value of the next smallest permutation bigger than state
     * if state represented an n-digit number.
+    *
     * @param state
     * @return
     */

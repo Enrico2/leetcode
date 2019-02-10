@@ -7,7 +7,7 @@ import com.enricode.util.LeetcodeApp
   */
 object InvalidParentheses extends LeetcodeApp {
   override def run(): Unit = {
-    val ins = Seq("()())()" , "(())()", "()()()", "(a)())()", "(a())()", ")(")
+    val ins = Seq("()())()", "(())()", "()()()", "(a)())()", "(a())()", ")(")
 
     ins.map(removeInvalidParentheses) foreach println
   }
@@ -17,8 +17,13 @@ object InvalidParentheses extends LeetcodeApp {
   private[this] def isValid(str: String): Boolean = {
     var s = List[Char]()
 
-    def push(c: Char) = { s = c +: s }
-    def pop = { s = s.tail }
+    def push(c: Char) = {
+      s = c +: s
+    }
+
+    def pop = {
+      s = s.tail
+    }
 
     val ans = str.foldLeft(true) {
       case (false, _) => false
@@ -52,21 +57,21 @@ object InvalidParentheses extends LeetcodeApp {
         val max = str.length - (pointers.length - i)
 
         if (p == max) {
-          if (i != 0) next(i-1) else false
+          if (i != 0) next(i - 1) else false
         } else {
           pointers(i) = p + 1
           changed = true
 
-          if (i < pointers.length-1) {
+          if (i < pointers.length - 1) {
             for (j <- i + 1 until pointers.length) {
-              pointers(j) = pointers(j-1) + 1
+              pointers(j) = pointers(j - 1) + 1
             }
           }
           changed
         }
       }
 
-      next(pointers.length-1)
+      next(pointers.length - 1)
     }
 
     val ans = ListBuffer[String]()

@@ -3,7 +3,9 @@ package com.enricode.util
 import scala.collection.mutable
 
 trait State
+
 case class StarState(c: Char) extends State
+
 case class CharState(c: Char) extends State
 
 // Example, Regex processor, support chars; .; +; *;
@@ -11,6 +13,7 @@ class RegexProcessor(regex: String) {
   // 0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz
 
   private[this] val states = mutable.ListBuffer[State]()
+
   def add(state: State): Unit = {
     states.append(state)
   }
@@ -57,7 +60,7 @@ class RegexProcessor(regex: String) {
           i += 1
           head = head.tail
         case StarState(c) =>
-          // cont from here.
+        // cont from here.
 
         case CharState(c) if c != char =>
           flag = false

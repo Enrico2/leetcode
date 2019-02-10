@@ -23,7 +23,7 @@ object StringToInteger extends LeetcodeApp {
           s * 10 + toDigit(c)
         }
 
-        val neg = (sign == "-")
+        val neg = sign == "-"
         val r = if (neg) -n else n
         if (Int.MaxValue.toString.length < num.length) {
           if (neg) Int.MinValue

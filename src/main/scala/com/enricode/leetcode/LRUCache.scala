@@ -5,9 +5,11 @@ import scala.collection.mutable
 
 /**
   * https://leetcode.com/problems/lru-cache/description/
+  *
   * @param capacity
   */
 class LRUCache(capacity: Int) {
+
   case class Node(var prev: Option[Node], var next: Option[Node], k: Int, var v: Int)
 
   private[this] var size = 0
@@ -83,15 +85,16 @@ object Solution extends LeetcodeApp {
     val cache = new LRUCache(2)
     cache.put(1, 1)
     cache.put(2, 2)
-    println(cache.get(1))  // returns 1
-    cache.put(3, 3)        // evicts key 2
-    println(cache.get(2))  // returns -1 (not found)
-    cache.put(4, 4)        // evicts key 1
-    println(cache.get(1))  // returns -1 (not found)
-    println(cache.get(3))  // returns 3
-    println(cache.get(4))  // returns 4
+    println(cache.get(1)) // returns 1
+    cache.put(3, 3) // evicts key 2
+    println(cache.get(2)) // returns -1 (not found)
+    cache.put(4, 4) // evicts key 1
+    println(cache.get(1)) // returns -1 (not found)
+    println(cache.get(3)) // returns 3
+    println(cache.get(4)) // returns 4
   }
 }
+
 /**
   * Your LRUCache object will be instantiated and called as such:
   * var obj = new LRUCache(capacity)

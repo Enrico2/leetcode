@@ -63,7 +63,6 @@ object NQueens extends LeetcodeApp {
       }
 
       rep
-
     } else {
       false
     }

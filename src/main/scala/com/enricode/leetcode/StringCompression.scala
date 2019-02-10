@@ -9,9 +9,9 @@ import scala.collection.mutable
 object StringCompression extends LeetcodeApp {
 
   override def run(): Unit = {
-//    val a2 = mutable.ArrayBuffer('a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b').toArray
-//    val a2 = mutable.ArrayBuffer('a','a','b','b','c','c','c').toArray
-    val a2 = mutable.ArrayBuffer('a','a','a','a','a','a','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','b','c','c','c','c','c','c','c','c','c','c','c','c','c','c').toArray
+    //    val a2 = mutable.ArrayBuffer('a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b').toArray
+    //    val a2 = mutable.ArrayBuffer('a','a','b','b','c','c','c').toArray
+    val a2 = mutable.ArrayBuffer('a', 'a', 'a', 'a', 'a', 'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c').toArray
     val l = compress(a2)
     println(a2.toList.take(l))
   }
@@ -23,7 +23,7 @@ object StringCompression extends LeetcodeApp {
     var write = 0
 
     for (i <- 0 until chars.length) {
-      if (i+1 == chars.length || chars(i+1) != chars(i)) {
+      if (i + 1 == chars.length || chars(i + 1) != chars(i)) {
         chars(write) = chars(curr)
         write += 1
         val num = (i - curr + 1)
@@ -34,10 +34,9 @@ object StringCompression extends LeetcodeApp {
           }
         }
 
-        curr = i+1
+        curr = i + 1
       }
     }
     write
-
   }
 }

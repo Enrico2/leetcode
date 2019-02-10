@@ -71,30 +71,30 @@ object CutOffTrees extends LeetcodeApp {
     val ans = cutOffTree(forest1)
 
     println(s"$ans")
-
   }
 
   import scala.collection.mutable
 
   def cutOffTree(_forest: List[List[Int]]): Int = {
     val forest = Array.ofDim[Int](_forest.length, _forest(0).length)
-    for (i <- 0 until forest.length) {
-      for (j <- 0 until forest(0).length) {
+    for (i <- forest.indices) {
+      for (j <- forest(0).indices) {
         forest(i)(j) = _forest(i)(j)
       }
     }
 
-    case class SearchNode(i:Int, j:Int, dist: Int)
+    case class SearchNode(i: Int, j: Int, dist: Int)
     case class Tree(i: Int, j: Int, height: Int)
     case class Node(i: Int, j: Int)
-    val diffs = Seq((-1,0), (1, 0), (0, -1), (0, 1))
+    val diffs = Seq((-1, 0), (1, 0), (0, -1), (0, 1))
 
     val visited = Array.ofDim[Boolean](forest.length, forest(0).length)
     val q = new mutable.Queue[SearchNode]()
+
     def shortestPath(source: Node, destination: Node): Int = {
       // Zero out visited
-      for (i <- 0 until visited.length) {
-        for (j <- 0 until visited(0).length) {
+      for (i <- visited.indices) {
+        for (j <- visited(0).indices) {
           visited(i)(j) = false
         }
       }
@@ -134,7 +134,6 @@ object CutOffTrees extends LeetcodeApp {
             }
           }
         }
-
       }
 
       dist
@@ -142,8 +141,8 @@ object CutOffTrees extends LeetcodeApp {
 
     val trees = mutable.ArrayBuffer[Tree]()
 
-    for (i <- 0 until forest.length) {
-      for (j <- 0 until forest(0).length) {
+    for (i <- forest.indices) {
+      for (j <- forest(0).indices) {
         if (forest(i)(j) > 1) trees.append(Tree(i, j, forest(i)(j)))
       }
     }
@@ -153,7 +152,7 @@ object CutOffTrees extends LeetcodeApp {
     var ans = 0
     var curr = Node(0, 0)
     var cont = true
-    for (i <- 0 until nodeOrder.length if cont) {
+    for (i <- nodeOrder.indices if cont) {
       val next = nodeOrder(i)
       val sp = if (curr == next) 0 else shortestPath(curr, next)
       if (sp != -1) {

@@ -23,8 +23,8 @@ object TrappingRainWaiter extends LeetcodeApp {
         lefts(i) = math.max(height(i), lefts(i - 1))
       }
 
-      rights(n-1) = height(n-1)
-      for (i <- n-2 to 0 by -1) {
+      rights(n - 1) = height(n - 1)
+      for (i <- n - 2 to 0 by -1) {
         rights(i) = math.max(height(i), rights(i + 1))
       }
 
@@ -43,9 +43,9 @@ object TrappingRainWaiter extends LeetcodeApp {
       var rightMax = Int.MinValue
 
       var i = 0
-      var j = n-1
+      var j = n - 1
       var ans = 0
-      while (i<j) {
+      while (i < j) {
         if (height(i) < height(j)) {
           if (height(i) > leftMax) {
             leftMax = height(i)

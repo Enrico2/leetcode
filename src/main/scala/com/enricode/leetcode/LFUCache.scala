@@ -132,12 +132,12 @@ class LFUCache(capacity: Int) {
 
   private[this] def addKeyToNext(count: Count, key: Int): Unit = {
     count.next match {
-      case Some(next) if (next.freq == count.freq+1) =>
+      case Some(next) if (next.freq == count.freq + 1) =>
         next.keys.add(key)
         keyToCount += ((key, next))
 
       case nextNext =>
-        val next = new Count(count.freq+1)
+        val next = new Count(count.freq + 1)
         next.keys.add(key)
         count.next = Some(next)
         next.prev = Some(count)
@@ -178,7 +178,6 @@ class LFUCache(capacity: Int) {
             lf.foreach(_.prev = Some(count))
             lowFreq = Some(count)
         }
-
     }
   }
 

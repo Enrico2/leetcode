@@ -1,6 +1,6 @@
 package com.enricode.leetcode
 
-import com.enricode.util.LeetcodeApp
+import com.enricode.util.{LeetcodeApp, ListNode}
 
 /**
   * https://leetcode.com/problems/add-two-numbers/description/
@@ -24,7 +24,6 @@ object AddTwoNumbers extends LeetcodeApp {
     l23.next = l24
 
     println(addTwoNumbers(l11, l21))
-
   }
 
   def addTwoNumbers(l1: ListNode, l2: ListNode): ListNode = {
@@ -40,7 +39,7 @@ object AddTwoNumbers extends LeetcodeApp {
       val v1 = if (n1 == null) 0 else n1._x
       val v2 = if (n2 == null) 0 else n2._x
 
-      val s = v1+v2+carry
+      val s = v1 + v2 + carry
       carry = s / 10
 
       val nextNode = new ListNode(s % 10)
@@ -64,29 +63,6 @@ object AddTwoNumbers extends LeetcodeApp {
 
     head
   }
-
 }
 
 
-class ListNode(var _x: Int = 0) {
-  var next: ListNode = null
-  var x: Int = _x
-
-  override def toString = s"$x -> ${if (next != null) next.toString else "null" }"
-}
-
-object ListNode {
-
-  case class NodeBuilder(last: ListNode, head: ListNode) {
-    def -->(x: Int): NodeBuilder = {
-      val newLast = new ListNode(x)
-      last.next = newLast
-      copy(last = newLast)
-    }
-  }
-
-  def -->(x: Int): NodeBuilder = {
-    val node = new ListNode(x)
-    NodeBuilder(node, node)
-  }
-}

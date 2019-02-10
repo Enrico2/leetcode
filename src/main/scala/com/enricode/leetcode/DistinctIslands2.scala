@@ -8,6 +8,7 @@ import scala.collection.mutable.ListBuffer
   * https://leetcode.com/problems/number-of-distinct-islands-ii
   */
 object DistinctIslands2 extends LeetcodeApp {
+
   import com.enricode.util.Util.inBounds
 
   override def run(): Unit = {
@@ -20,31 +21,31 @@ object DistinctIslands2 extends LeetcodeApp {
 
     val sea2 =
       Array(
-        Array(1,0,1,1,1,0,1,0,1,0,0,0,1,1,0),
-        Array(1,1,1,0,1,0,1,1,0,1,0,1,1,0,1),
-        Array(1,0,1,1,0,0,0,1,0,1,0,0,0,0,0),
-        Array(1,1,1,0,0,1,0,0,0,1,0,1,0,0,0),
-        Array(0,0,0,1,1,0,1,0,0,0,1,0,1,0,1),
-        Array(0,1,0,1,0,0,0,1,0,0,1,1,1,0,1),
-        Array(1,1,1,0,0,0,0,0,0,0,0,0,1,0,1),
-        Array(0,1,1,1,1,0,0,1,1,1,0,1,0,1,1),
-        Array(1,1,1,1,0,0,1,0,1,0,1,1,1,0,0),
-        Array(1,0,1,1,1,1,1,1,1,0,1,1,1,0,1))
+        Array(1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0),
+        Array(1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1),
+        Array(1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0),
+        Array(1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0),
+        Array(0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1),
+        Array(0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1),
+        Array(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1),
+        Array(0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1),
+        Array(1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0),
+        Array(1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1))
 
     // x,y,z,a,b,c,d,e,f
-//    val sea3 =
-//      Array(
-        //    0         5         10      14
-        // Array(X,0,X,X,X,0,Y,0,A,0,0,0,Y,Y,0), // 0
-        // Array(X,X,X,0,X,0,Y,Y,0,Z,0,Y,Y,0,A), // 1
-        // Array(X,0,X,X,0,0,0,Y,0,Z,0,0,0,0,0), // 2
-        // Array(X,X,X,0,0,A,0,0,0,Z,0,A,0,0,0), // 3
-        // Array(0,0,0,E,E,0,A,0,0,0,D,0,D,0,B), // 4
-        // Array(0,F,0,E,0,0,0,A,0,0,D,D,D,0,B), // 5
-        // Array(F,F,F,0,0,0,0,0,0,0,0,0,D,0,B), // 6
-        // Array(0,F,F,F,F,0,0,F,F,F,0,C,0,B,B), // 7
-        // Array(F,F,F,F,0,0,F,0,F,0,C,C,C,0,0), // 8
-        // Array(F,0,F,F,F,F,F,F,F,0,C,C,C,0,A)) // 9
+    //    val sea3 =
+    //      Array(
+    //    0         5         10      14
+    // Array(X,0,X,X,X,0,Y,0,A,0,0,0,Y,Y,0), // 0
+    // Array(X,X,X,0,X,0,Y,Y,0,Z,0,Y,Y,0,A), // 1
+    // Array(X,0,X,X,0,0,0,Y,0,Z,0,0,0,0,0), // 2
+    // Array(X,X,X,0,0,A,0,0,0,Z,0,A,0,0,0), // 3
+    // Array(0,0,0,E,E,0,A,0,0,0,D,0,D,0,B), // 4
+    // Array(0,F,0,E,0,0,0,A,0,0,D,D,D,0,B), // 5
+    // Array(F,F,F,0,0,0,0,0,0,0,0,0,D,0,B), // 6
+    // Array(0,F,F,F,F,0,0,F,F,F,0,C,0,B,B), // 7
+    // Array(F,F,F,F,0,0,F,0,F,0,C,C,C,0,0), // 8
+    // Array(F,0,F,F,F,F,F,F,F,0,C,C,C,0,A)) // 9
 
     /*
     Z => 31164468 -> ListBuffer(Island(List((1,9), (2,9), (3,9))))
@@ -64,7 +65,7 @@ object DistinctIslands2 extends LeetcodeApp {
 
 
   case class Island(ijs: Seq[(Int, Int)]) {
-    val (n,m,grid) = {
+    val (n, m, grid) = {
       val minI = ijs.map(_._1).min
       val minJ = ijs.map(_._2).min
       val maxI = ijs.map(_._1).max
@@ -73,23 +74,23 @@ object DistinctIslands2 extends LeetcodeApp {
       val n = maxI - minI + 1
       val m = maxJ - minJ + 1
       val g = Array.ofDim[Int](n, m)
-      ijs.foreach { case (i,j) =>
-        g(n-(maxI-i)-1)(m-(maxJ-j)-1) = 1
+      ijs.foreach { case (i, j) =>
+        g(n - (maxI - i) - 1)(m - (maxJ - j) - 1) = 1
       }
-      (n,m,g)
+      (n, m, g)
     }
 
 
     def rotations: List[List[List[Int]]] = {
       val move = (0 to 7).map {
         case 0 => (i: Int, j: Int) => (i, j)
-        case 1 => (i: Int, j: Int) => (n-1-i, j)
-        case 2 => (i: Int, j: Int) => (i, m-1-j)
-        case 3 => (i: Int, j: Int) => (n-1-i, m-1-j)
+        case 1 => (i: Int, j: Int) => (n - 1 - i, j)
+        case 2 => (i: Int, j: Int) => (i, m - 1 - j)
+        case 3 => (i: Int, j: Int) => (n - 1 - i, m - 1 - j)
         case 4 => (i: Int, j: Int) => (j, i)
-        case 5 => (i: Int, j: Int) => (m-1-j, i)
-        case 6 => (i: Int, j: Int) => (j, n-1-i)
-        case 7 => (i: Int, j: Int) => (m-1-j, n-1-i)
+        case 5 => (i: Int, j: Int) => (m - 1 - j, i)
+        case 6 => (i: Int, j: Int) => (j, n - 1 - i)
+        case 7 => (i: Int, j: Int) => (m - 1 - j, n - 1 - i)
       }
 
       (0 to 7).map { id =>
@@ -145,7 +146,7 @@ object DistinctIslands2 extends LeetcodeApp {
 
     for (i <- 0 until n) {
       for (j <- 0 until m) {
-        if (!seen(i,j)) {
+        if (!seen(i, j)) {
           if (grid(i)(j) == 1) {
             islands.append(grabIsland(i, j))
           }
@@ -158,11 +159,11 @@ object DistinctIslands2 extends LeetcodeApp {
   }
 
   def numDistinctIslands2(grid: Array[Array[Int]]): Int = {
-    val y1 = Island(List((0,6), (1,6), (1,7), (2,7)))
-    val y2 = Island(List((0,12), (1,12), (0,13), (1,11)))
+    val y1 = Island(List((0, 6), (1, 6), (1, 7), (2, 7)))
+    val y2 = Island(List((0, 12), (1, 12), (0, 13), (1, 11)))
 
-    println(s"${y1.hashCode() }")
-    println(s"${y2.hashCode() }")
+    println(s"${y1.hashCode()}")
+    println(s"${y2.hashCode()}")
 
     println(s"--------------")
     val islands = findIslands(grid)

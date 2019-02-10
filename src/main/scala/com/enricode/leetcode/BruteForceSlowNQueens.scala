@@ -27,8 +27,8 @@ object BruteForceSlowNQueens extends LeetcodeApp {
 
     for (i <- 0 until n; j <- 0 until n) {
       if (a(i)(j)) {
-        var x=0
-        var y=0
+        var x = 0
+        var y = 0
 
         x = i-1; y = j-1; while (x >= 0 && y >= 0) { if (a(x)(y)) rep = false; x -= 1; y -= 1 }
         x = i-1; y = j+1; while (x >= 0 && y < n ) { if (a(x)(y)) rep = false; x -= 1; y += 1 }

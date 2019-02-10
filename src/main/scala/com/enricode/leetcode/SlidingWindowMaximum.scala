@@ -8,7 +8,7 @@ import com.enricode.util.LeetcodeApp
   */
 object SlidingWindowMaximum extends LeetcodeApp {
   override def run(): Unit = {
-    println(maxSlidingWindow(Array(1,3,1,2,0,5), 3).toList)
+    println(maxSlidingWindow(Array(1, 3, 1, 2, 0, 5), 3).toList)
   }
 
   def maxSlidingWindow(a: Array[Int], k: Int): Array[Int] = {
@@ -29,7 +29,7 @@ object SlidingWindowMaximum extends LeetcodeApp {
 
     maxSoFar = Int.MinValue
     rightMax.indices.reverse.foreach { i =>
-      if (i % k == k-1) {
+      if (i % k == k - 1) {
         maxSoFar = Int.MinValue
       }
       maxSoFar = math.max(a(i), maxSoFar)
@@ -38,7 +38,7 @@ object SlidingWindowMaximum extends LeetcodeApp {
 
     val d = Array.ofDim[Int](n - k + 1)
     d.indices.foreach { i =>
-      d(i) = math.max(rightMax(i), leftMax(i+k-1))
+      d(i) = math.max(rightMax(i), leftMax(i + k - 1))
     }
     d
   }
@@ -61,7 +61,7 @@ object SlidingWindowMaximum extends LeetcodeApp {
       }
 
       deque.offer(i)
-      if (i >= k - 1) ans(i-k+1) = a(deque.peekFirst())
+      if (i >= k - 1) ans(i - k + 1) = a(deque.peekFirst())
     }
 
     ans

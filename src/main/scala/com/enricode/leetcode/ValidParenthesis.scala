@@ -9,7 +9,7 @@ import scala.collection.mutable
 object ValidParenthesis extends LeetcodeApp {
 
   override def run(): Unit = {
-    val ss = Seq("]", "(", "()", "({)}","({[][]()}({})[])") // false, true, false, true
+    val ss = Seq("]", "(", "()", "({)}", "({[][]()}({})[])") // false, true, false, true
     ss.foreach(s => println(isValid(s)))
   }
 

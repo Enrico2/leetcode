@@ -51,7 +51,7 @@ object WordLadder2 extends LeetcodeApp {
     while (q.nonEmpty && !found) {
       val layerWords = ListBuffer[String]()
 
-      for (_ <- 0 until q.size) {
+      for (_ <- q.indices) {
         val path = q.dequeue()
 
         val newWords = getNext(path.last)

@@ -38,7 +38,5 @@ class ConnectedGraph[T](in: Array[Array[T]]) {
 }
 
 
-case class Edge[T](n1: Node[T], n2: Node[T])
 
-case class Node[T](data: T, edges: List[Edge[T]] = Nil)
 
